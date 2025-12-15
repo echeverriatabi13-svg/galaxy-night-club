@@ -22,40 +22,22 @@
     h1 {
       text-align: center;
       font-size: 3rem;
-      margin-bottom: 10px;
       color: #e6b3ff;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 30px;
       color: #9fd4ff;
+      margin-bottom: 30px;
     }
 
     .container {
       max-width: 900px;
       margin: auto;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.55);
       border-radius: 20px;
       padding: 30px;
       box-shadow: 0 0 25px rgba(180, 0, 255, 0.6);
-    }
-
-    .section {
-      margin-bottom: 25px;
-    }
-
-    .section h3 {
-      color: #c77dff;
-      border-bottom: 1px solid #6a00ff;
-      padding-bottom: 5px;
-      margin-bottom: 15px;
-    }
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      margin: 6px 0;
     }
 
     .controls {
@@ -75,17 +57,58 @@
       font-size: 1rem;
     }
 
-    .total {
-      text-align: right;
-      font-size: 1.4rem;
-      margin-top: 20px;
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .section h3 {
+      color: #c77dff;
+      border-bottom: 1px solid #6a00ff;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      margin: 10px 0;
+      gap: 10px;
+    }
+
+    .qty {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .qty button {
+      background: #6a00ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .qty span {
+      min-width: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .price {
       color: #7df9ff;
     }
 
-    .item input[type="checkbox"] {
-      margin-right: 10px;
+    .total {
+      text-align: right;
+      font-size: 1.6rem;
+      margin-top: 25px;
+      color: #7df9ff;
     }
-
   </style>
 </head>
 <body>
@@ -95,119 +118,81 @@
 
     <div class="container">
       <div class="controls">
-        <div>
-          <strong>¿Es facción?</strong>
-        </div>
+        <strong>¿Es facción?</strong>
         <select id="faccion" onchange="calcularTotal()">
           <option value="0">No</option>
-          <option value="20">Sí – 20% descuento</option>
-          <option value="25">Sí – 25% descuento</option>
+          <option value="20">Sí – 20%</option>
+          <option value="25">Sí – 25%</option>
         </select>
       </div>
 
       <div class="section">
         <h3>🚀 Fases Lunares</h3>
         <div class="item">
-          <input type="checkbox" id="piscola" value="2000" onchange="calcularTotal()">
-          <span>Piscola</span><span>$2.000</span>
+          <span>Piscola</span>
+          <div class="qty">
+            <button onclick="cambiarCantidad('piscola', -1)">−</button>
+            <span id="piscola">0</span>
+            <button onclick="cambiarCantidad('piscola', 1)">+</button>
+          </div>
+          <span class="price">$2.000</span>
         </div>
         <div class="item">
-          <input type="checkbox" id="ruso_blanco" value="2000" onchange="calcularTotal()">
-          <span>Ruso Blanco</span><span>$2.000</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="sexo_playa" value="2000" onchange="calcularTotal()">
-          <span>Sexo en la Playa</span><span>$2.000</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="agua_ardiente" value="2000" onchange="calcularTotal()">
-          <span>Agua Ardiente</span><span>$2.000</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="blue_label" value="2000" onchange="calcularTotal()">
-          <span>Blue Label</span><span>$2.000</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="espumante" value="2000" onchange="calcularTotal()">
-          <span>Espumante</span><span>$2.000</span>
+          <span>Ruso Blanco</span>
+          <div class="qty">
+            <button onclick="cambiarCantidad('ruso', -1)">−</button>
+            <span id="ruso">0</span>
+            <button onclick="cambiarCantidad('ruso', 1)">+</button>
+          </div>
+          <span class="price">$2.000</span>
         </div>
       </div>
 
       <div class="section">
         <h3>🛸 Viaje Nebular</h3>
         <div class="item">
-          <input type="checkbox" id="agua_mineral" value="800" onchange="calcularTotal()">
-          <span>Agua Mineral</span><span>$800</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="energetica" value="1000" onchange="calcularTotal()">
-          <span>Energética</span><span>$1.000</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="mojito_sin_alcohol" value="1000" onchange="calcularTotal()">
-          <span>Mojito sin Alcohol</span><span>$1.000</span>
+          <span>Agua Mineral</span>
+          <div class="qty">
+            <button onclick="cambiarCantidad('agua', -1)">−</button>
+            <span id="agua">0</span>
+            <button onclick="cambiarCantidad('agua', 1)">+</button>
+          </div>
+          <span class="price">$800</span>
         </div>
       </div>
 
-      <div class="section">
-        <h3>🔥 Máximo Impulso</h3>
-        <div class="item">
-          <input type="checkbox" id="chorrillana" value="800" onchange="calcularTotal()">
-          <span>Chorrillana</span><span>$800</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="tabla_queso" value="800" onchange="calcularTotal()">
-          <span>Tabla de Queso</span><span>$800</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="papas_cheese" value="800" onchange="calcularTotal()">
-          <span>Papas Cheese</span><span>$800</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <h3>☕ Post‑Viaje Coffee Noir</h3>
-        <div class="item">
-          <input type="checkbox" id="sandwich_parisen" value="800" onchange="calcularTotal()">
-          <span>Sándwich Parisén</span><span>$800</span>
-        </div>
-        <div class="item">
-          <input type="checkbox" id="te_helado" value="800" onchange="calcularTotal()">
-          <span>Té Helado</span><span>$800</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <h3>🍬 Dulce Driveline</h3>
-        <div class="item">
-          <input type="checkbox" id="gansito" value="700" onchange="calcularTotal()">
-          <span>Gansito</span><span>$700</span>
-        </div>
-      </div>
-
-      <div class="total" id="total">Seleccione productos en la calculadora original para ver el total</div>
+      <div class="total" id="total">Total: $0</div>
     </div>
   </div>
 
   <script>
+    const precios = {
+      piscola: 2000,
+      ruso: 2000,
+      agua: 800
+    };
+
+    function cambiarCantidad(id, cambio) {
+      const span = document.getElementById(id);
+      let cantidad = parseInt(span.textContent);
+      cantidad = Math.max(0, cantidad + cambio);
+      span.textContent = cantidad;
+      calcularTotal();
+    }
+
     function calcularTotal() {
       let total = 0;
+      for (const item in precios) {
+        const cantidad = parseInt(document.getElementById(item).textContent);
+        total += cantidad * precios[item];
+      }
 
-      // Obtener los valores de cada producto seleccionado
-      document.querySelectorAll('.item input[type="checkbox"]:checked').forEach(item => {
-        total += parseInt(item.value);
-      });
+      const descuento = parseInt(document.getElementById('faccion').value);
+      if (descuento > 0) {
+        total -= total * (descuento / 100);
+      }
 
-      // Obtener el descuento
-      const descuento = document.getElementById('faccion').value;
-
-      // Aplicar el descuento si es necesario
-      const totalConDescuento = total - (total * (descuento / 100));
-
-      // Mostrar el total final
-      document.getElementById('total').innerText = descuento == 0
-        ? `Total: $${total}`
-        : `Total con ${descuento}% de descuento: $${totalConDescuento.toFixed(2)}`;
+      document.getElementById('total').textContent = `Total: $${total.toLocaleString('es-CL')}`;
     }
   </script>
 </body>
